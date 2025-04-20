@@ -1,0 +1,24 @@
+{
+  "name": "bizzcoll-ready-tailwind",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "autoprefixer": "^10.4.14",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-hot-toast": "^2.5.2",
+    "tailwindcss": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "22.14.1",
+    "@types/react": "19.1.2",
+    "postcss": "^8.4.21",
+    "typescript": "5.8.3"
+  }
+}
