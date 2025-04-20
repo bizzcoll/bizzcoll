@@ -1,6 +1,9 @@
 {
-  "name": "bizzcoll-ready-tailwind",
-  "version": "0.1.0",
+  "name": "bizzcoll",
+  "version": "1.0.0",
+  "description": "BizzColl - Connect influencers with brands effortlessly.",
+  "author": "Dvir Dishi",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
