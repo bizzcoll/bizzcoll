@@ -1,0 +1,77 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["auth", "public"]
+}
+
+model applications {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  deal_id    String?  @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  creator_id String?  @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  message    String?
+  status     String?
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+
+  users users? @relation(fields: [creator_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  deals deals? @relation(fields: [deal_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@schema("public")
+}
+
+model deals {
+  id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title        String?
+  business_id  String?        @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  description  String?
+  budget       Decimal?       @db.Decimal
+  media_type   String?        @default("")
+  created_at   DateTime       @default(now()) @db.Timestamptz(6)
+
+  applications applications[]
+  users        users? @relation(fields: [business_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@schema("public")
+}
+
+model users {
+  id         String         @id @default(dbgenerated("auth.uid()")) @db.Uuid
+  type       String         @default("\"creator\" או \"business\"")
+  email      String?
+  created_at DateTime?      @default(now()) @db.Timestamp(6)
+  full_name  String?
+
+  applications applications[]
+  deals        deals[]
+
+  // קשר ל־auth_users דרך אותו relation
+  auth_user auth_users? @relation("AuthToPublic", fields: [id], references: [id])
+
+  @@schema("public")
+}
+
+
+model auth_users {
+  id                 String    @id @db.Uuid
+  email              String?   @db.VarChar(255)
+  role               String?   @db.VarChar(255)
+  encrypted_password String?   @db.VarChar(255)
+  confirmed_at       DateTime? @db.Timestamptz(6)
+  created_at         DateTime? @db.Timestamptz(6)
+  updated_at         DateTime? @db.Timestamptz(6)
+  last_sign_in_at    DateTime? @db.Timestamptz(6)
+  aud                String?   @db.VarChar(255)
+  raw_user_meta_data Json?     @db.Json   // ✅ הוספת שם תצוגה ו־role כאן
+
+  public_user users? @relation("AuthToPublic")
+
+  @@map("users")
+  @@schema("auth")
+}
+
+
+

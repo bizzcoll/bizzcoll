@@ -1,4 +1,3 @@
-// context/UserContext.tsx
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
@@ -8,16 +7,19 @@ import type { User } from '@supabase/supabase-js'
 type UserContextType = {
   user: User | null
   role: string | null
+  fullName: string | null
 }
 
 const UserContext = createContext<UserContextType>({
   user: null,
   role: null,
+  fullName: null,
 })
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [role, setRole] = useState<string | null>(null)
+  const [fullName, setFullName] = useState<string | null>(null)
 
   useEffect(() => {
     const getUserData = async () => {
@@ -27,10 +29,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
       if (user) {
         setUser(user)
-
-        // נשלוף את role מתוך ה־metadata
-        const role = user.user_metadata?.role || null
-        setRole(role)
+        setRole(user.user_metadata?.role || null)
+        setFullName(user.user_metadata?.full_name || null)
       }
     }
 
@@ -40,9 +40,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       if (session?.user) {
         setUser(session.user)
         setRole(session.user.user_metadata?.role || null)
+        setFullName(session.user.user_metadata?.full_name || null)
       } else {
         setUser(null)
         setRole(null)
+        setFullName(null)
       }
     })
 
@@ -52,7 +54,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <UserContext.Provider value={{ user, role }}>
+    <UserContext.Provider value={{ user, role, fullName }}>
       {children}
     </UserContext.Provider>
   )

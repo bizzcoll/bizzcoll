@@ -7,6 +7,7 @@ export default function EmailRegister() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [role, setRole] = useState<'INFLUENCER' | 'DEAL_MAKER'>('INFLUENCER')
+  const [fullName, setFullName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -17,7 +18,7 @@ export default function EmailRegister() {
       const res = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password, role }),
+        body: JSON.stringify({ email, password, role, full_name: fullName }),
       })
 
       const data = await res.json()
@@ -45,7 +46,6 @@ export default function EmailRegister() {
         position: 'top-center',
         duration: 5000,
       })
-
     } catch (err: any) {
       console.error('❌ Network error:', err)
       setIsSubmitting(false)
@@ -58,6 +58,14 @@ export default function EmailRegister() {
 
   return (
     <form onSubmit={handleRegister} className="space-y-4">
+      <input
+        type="text"
+        placeholder="שם מלא"
+        value={fullName}
+        onChange={(e) => setFullName(e.target.value)}
+        required
+        className="w-full px-4 py-2 border rounded"
+      />
       <input
         type="email"
         placeholder="אימייל"
