@@ -9,10 +9,15 @@ export default function DashboardRedirect() {
   const router = useRouter()
 
   useEffect(() => {
+    if (!role) return
     if (role === 'INFLUENCER') {
-      router.replace('/dashboard/influencer')
+      router.replace('/dashboard/influencer/deals')
     } else if (role === 'DEAL_MAKER') {
-      router.replace('/dashboard/deal-maker')
+      router.replace('/dashboard/deal-maker/my-deals')
+    } else if (role === 'ADMIN') {
+      router.replace('/dashboard/admin')
+    } else {
+      router.replace('/auth')
     }
   }, [role, router])
 

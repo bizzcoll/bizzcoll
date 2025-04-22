@@ -15,30 +15,29 @@ export default function EmailLogin() {
     e.preventDefault()
     setError('')
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-
-    if (error) {
-      setError(error.message)
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+    if (signInError) {
+      setError(signInError.message)
       return
     }
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user?.email_confirmed_at) {
+      toast.error('יש לאשר את כתובת האימייל לפני התחברות', { position: 'top-center' })
+      return
+    }
 
     const role = user?.user_metadata?.role
 
-    if (!user?.email_confirmed_at) {
-      toast.error('יש לאשר את כתובת האימייל לפני התחברות')
-      return
-    }
-
-    if (role === 'influencer') {
-      router.push('/dashboard/influencer')
-    } else if (role === 'deal_maker') {
-      router.push('/dashboard/deal-maker')
+    if (role === 'INFLUENCER') {
+      router.push('/dashboard/influencer/deals')
+    } else if (role === 'DEAL_MAKER') {
+      router.push('/dashboard/deal-maker/my-deals')
+    } else if (role === 'ADMIN') {
+      router.push('/dashboard/admin')
     } else {
-      router.push('/dashboard') // ברירת מחדל אם אין role
+      router.push('/dashboard')
     }
   }
 

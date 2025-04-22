@@ -9,20 +9,19 @@ export default function DealMakerSidebar() {
 
   const linkClass = (href: string) =>
     clsx(
-      'px-3 py-2 rounded-md transition-all duration-300 ease-in-out text-right',
+      'px-4 py-2 w-full rounded-lg text-right transition-all duration-300 ease-in-out tracking-wide font-medium',
       {
-        'bg-gray-200/30 backdrop-blur-md border shadow-inner shadow-green-100/40 ring-1 ring-green-200/50 text-green-900 font-semibold scale-[1.10]':
+        'bg-white/10 text-green-900 scale-[1.10] font-semibold border border-gray-400/40 shadow-md shadow-green-200/30':
           pathname === href,
-        'text-green-700 hover:text-black hover:bg-green-50 hover:font-semibold hover:scale-[1.10]':
+        'text-green-700 hover:text-black hover:bg-green-50/50 hover:scale-[1.10]':
           pathname !== href,
       }
     )
 
   return (
-    <aside className="bg-green-100/40 backdrop-blur-sm w-64 p-6 space-y-6 shadow-inner">
-      <h2 className="text-xl font-bold text-green-700 text-right">ניהול עסק 💼</h2>
-      <nav className="flex flex-col items-end space-y-2">
-        <Link href="/dashboard/deal-maker" className={linkClass('/dashboard/deal-maker')}>🏠 ראשי</Link>
+    <aside className="bg-gradient-to-b from-green-100/40 to-green-50/30 backdrop-blur-sm w-64 p-6 space-y-6 shadow-inner hidden md:block">
+      <h2 className="text-2xl font-semibold text-green-800 text-right tracking-wide">💼 ניהול עסק</h2>
+      <nav className="flex flex-col items-end space-y-2 text-sm">
         <Link href="/dashboard/deal-maker/my-deals" className={linkClass('/dashboard/deal-maker/my-deals')}>📦 הדילים שלי</Link>
         <Link href="/dashboard/deal-maker/new" className={linkClass('/dashboard/deal-maker/new')}>➕ פרסם דיל</Link>
         <Link href="/dashboard/deal-maker/profile" className={linkClass('/dashboard/deal-maker/profile')}>👤 פרופיל</Link>

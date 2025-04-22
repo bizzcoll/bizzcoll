@@ -23,11 +23,11 @@ export default function AuthForm() {
         <Image
         src="/logo.png"
         alt="BizzColl Logo"
-        width={130}
+        width={120}
         height={60}
-        className="mx-auto mb-4 rounded-full"
+        className="mx-auto mb-2 rounded-full"
         />
-      <h1 className="text-2xl font-bold mb-4"> BizzCollברוך הבא ל־</h1>
+      <h1 className="text-xl font-bold mb-4"> BizzCollברוך הבא ל־</h1>
 
         <div className="flex justify-center gap-4 text-sm border-b border-gray-300 mb-4">
             <button

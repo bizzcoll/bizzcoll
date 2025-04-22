@@ -8,7 +8,7 @@ export default function Header() {
   const { user, fullName } = useUser()
 
   return (
-    <header className="px-6 py-3 bg-white/30 backdrop-blur-lg shadow-lg rounded-b-xl flex justify-between items-center border-b border-white/20">
+    <header className="px-6 py-3 bg-white/30 backdrop-blur-lg shadow-lg  flex justify-between items-center border-b border-white/20">
       {/* ימין - מידע על המשתמש */}
       <div className="flex items-center gap-4 text-sm text-gray-800">
         {user ? (
@@ -19,7 +19,7 @@ export default function Header() {
             <LogoutButton />
           </>
         ) : (
-          <span className="text-gray-500">לא מחובר</span>
+          <span className="text-gray-500"></span>
         )}
       </div>
 
@@ -28,8 +28,8 @@ export default function Header() {
         <Image
           src="/logo.png"
           alt="BizzColl Logo"
-          width={48}
-          height={48}
+          width={68}
+          height={58}
           className="rounded-full shadow-sm border border-white/40"
         />
         <h1 className="text-2xl font-bold text-gray-900 tracking-wide uppercase">

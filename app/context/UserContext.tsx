@@ -22,30 +22,22 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [fullName, setFullName] = useState<string | null>(null)
 
   useEffect(() => {
-    const getUserData = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser()
+    const fetchSession = async () => {
+      const { data: sessionData } = await supabase.auth.getSession()
+      const user = sessionData.session?.user || null
 
-      if (user) {
-        setUser(user)
-        setRole(user.user_metadata?.role || null)
-        setFullName(user.user_metadata?.full_name || null)
-      }
+      setUser(user)
+      setRole(user?.user_metadata?.role || null)
+      setFullName(user?.user_metadata?.full_name || null)
     }
 
-    getUserData()
+    fetchSession()
 
-    const { data: listener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        setUser(session.user)
-        setRole(session.user.user_metadata?.role || null)
-        setFullName(session.user.user_metadata?.full_name || null)
-      } else {
-        setUser(null)
-        setRole(null)
-        setFullName(null)
-      }
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      const user = session?.user || null
+      setUser(user)
+      setRole(user?.user_metadata?.role || null)
+      setFullName(user?.user_metadata?.full_name || null)
     })
 
     return () => {

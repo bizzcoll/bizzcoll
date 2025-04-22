@@ -6,9 +6,11 @@ import { toast } from 'react-hot-toast'
 export default function EmailRegister() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState<'INFLUENCER' | 'DEAL_MAKER'>('INFLUENCER')
+  const [role, setRole] = useState<'INFLUENCER' | 'DEAL_MAKER' | 'ADMIN'>('INFLUENCER')
   const [fullName, setFullName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const devMode = true // שים false בפרודקשן
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,8 +25,6 @@ export default function EmailRegister() {
 
       const data = await res.json()
       setIsSubmitting(false)
-
-      console.log('📨 Register response:', res.status, data)
 
       if (res.status === 409) {
         toast.error('האימייל הזה כבר קיים במערכת. נסה להתחבר.', {
@@ -83,22 +83,48 @@ export default function EmailRegister() {
         className="w-full px-4 py-2 border rounded"
       />
 
-      <div className="flex justify-center gap-4 text-sm">
-        <button
-          type="button"
-          onClick={() => setRole('INFLUENCER')}
-          className={`px-4 py-2 rounded border ${role === 'INFLUENCER' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}
-        >
-          יוצר תוכן
-        </button>
-        <button
-          type="button"
-          onClick={() => setRole('DEAL_MAKER')}
-          className={`px-4 py-2 rounded border ${role === 'DEAL_MAKER' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}
-        >
-          בעל עסק
-        </button>
-      </div>
+      {devMode ? (
+        <div className="flex justify-center gap-4 text-sm flex-wrap">
+          <button
+            type="button"
+            onClick={() => setRole('INFLUENCER')}
+            className={`px-4 py-2 rounded border ${role === 'INFLUENCER' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}
+          >
+            יוצר תוכן
+          </button>
+          <button
+            type="button"
+            onClick={() => setRole('DEAL_MAKER')}
+            className={`px-4 py-2 rounded border ${role === 'DEAL_MAKER' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}
+          >
+            בעל עסק
+          </button>
+          <button
+            type="button"
+            onClick={() => setRole('ADMIN')}
+            className={`px-4 py-2 rounded border ${role === 'ADMIN' ? 'bg-red-600 text-white' : 'bg-gray-100'}`}
+          >
+            👑 אדמין (dev)
+          </button>
+        </div>
+      ) : (
+        <div className="flex justify-center gap-4 text-sm">
+          <button
+            type="button"
+            onClick={() => setRole('INFLUENCER')}
+            className={`px-4 py-2 rounded border ${role === 'INFLUENCER' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}
+          >
+            יוצר תוכן
+          </button>
+          <button
+            type="button"
+            onClick={() => setRole('DEAL_MAKER')}
+            className={`px-4 py-2 rounded border ${role === 'DEAL_MAKER' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}
+          >
+            בעל עסק
+          </button>
+        </div>
+      )}
 
       <button
         type="submit"

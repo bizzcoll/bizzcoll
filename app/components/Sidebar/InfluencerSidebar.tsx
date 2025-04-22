@@ -9,20 +9,19 @@ export default function InfluencerSidebar() {
 
   const linkClass = (href: string) =>
     clsx(
-      'px-3 py-2 rounded-md transition-all duration-300 ease-in-out text-right',
+      'px-4 py-2 w-full rounded-lg text-right transition-all duration-300 ease-in-out tracking-wide font-medium',
       {
-        'bg-gray-400/20 backdrop-blur-md border shadow-inner shadow-blue-100/40 ring-1 ring-blue-200/50 text-blue-900 font-semibold scale-[1.10]':
+        'bg-white/10 text-blue-900 scale-[1.10] font-semibold border border-gray-400/40 shadow-md shadow-blue-200/30':
           pathname === href,
-        'text-blue-700 font-normal hover:text-black hover:bg-blue-50 hover:font-semibold hover:scale-[1.10]':
+        'text-blue-700 hover:text-black hover:bg-blue-50/50 hover:scale-[1.10]':
           pathname !== href,
       }
     )
 
   return (
-    <aside className="bg-blue-100/40 backdrop-blur-sm w-64 p-6 space-y-6 shadow-inner">
-      <h2 className="text-xl font-bold text-blue-700 text-right">יוצר תוכן 🎥</h2>
-      <nav className="flex flex-col items-end space-y-2">
-        <Link href="/dashboard/influencer" className={linkClass('/dashboard/influencer')}>🏠 ראשי</Link>
+    <aside className="bg-gradient-to-b from-blue-100/40 to-blue-50/30 backdrop-blur-sm w-64 p-6 space-y-6 shadow-inner hidden md:block">
+      <h2 className="text-2xl font-semibold text-blue-800 text-right tracking-wide">🎥 יוצר תוכן</h2>
+      <nav className="flex flex-col items-end space-y-2 text-sm">
         <Link href="/dashboard/influencer/deals" className={linkClass('/dashboard/influencer/deals')}>📦 מצא דילים</Link>
         <Link href="/dashboard/influencer/applied" className={linkClass('/dashboard/influencer/applied')}>💡 ההגשות שלך</Link>
         <Link href="/dashboard/influencer/profile" className={linkClass('/dashboard/influencer/profile')}>👤 פרופיל</Link>
