@@ -51,7 +51,7 @@ async function main() {
     }
   })
 
-  console.log('\n🧍 משתמשים מחוברים (תצוגת טבלה):\n')
+  console.log('\n🧍 Registered Authrized Users (Table View)):\n')
   console.table(tableData)
 
   // הכנה ל־CSV

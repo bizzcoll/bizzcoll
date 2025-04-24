@@ -16,35 +16,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/register/route.js"
     ],
-    "/verify-email/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/verify-email/page.js"
-    ],
     "/dashboard-redirect/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard-redirect/page.js"
-    ],
-    "/dashboard/admin/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/admin/layout.js"
-    ],
-    "/dashboard/admin/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/admin/page.js"
-    ],
-    "/api/admin/users/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/admin/users/route.js"
-    ],
-    "/unauthorized/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/unauthorized/page.js"
     ],
     "/dashboard/deal-maker/layout": [
       "static/chunks/webpack.js",
@@ -56,25 +31,30 @@
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/deal-maker/my-deals/page.js"
     ],
+    "/api/deals/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/deals/route.js"
+    ],
     "/dashboard/deal-maker/new/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/deal-maker/new/page.js"
     ],
+    "/dashboard/deal-maker/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/deal-maker/page.js"
+    ],
+    "/dashboard/deal-maker/my-deals/[id]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/deal-maker/my-deals/[id]/page.js"
+    ],
     "/dashboard/deal-maker/profile/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/deal-maker/profile/page.js"
-    ],
-    "/dashboard/influencer/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/influencer/layout.js"
-    ],
-    "/dashboard/influencer/deals/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/influencer/deals/page.js"
     ]
   }
 }

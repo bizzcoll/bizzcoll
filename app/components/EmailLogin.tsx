@@ -21,14 +21,17 @@ export default function EmailLogin() {
       return
     }
 
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (!user?.email_confirmed_at) {
-      toast.error('יש לאשר את כתובת האימייל לפני התחברות', { position: 'top-center' })
-      return
-    }
-
+    const { data: { session } } = await supabase.auth.getSession()
+    const user = session?.user
     const role = user?.user_metadata?.role
+
+    // ✅ בדיקת אימות מייל רק ב־PRODUCTION, ו־ADMIN תמיד עובר
+    if (process.env.NODE_ENV === 'production') {
+      if (!user?.email_confirmed_at && role !== 'ADMIN') {
+        toast.error('יש לאשר את כתובת האימייל לפני התחברות', { position: 'top-center' })
+        return
+      }
+    }
 
     if (role === 'INFLUENCER') {
       router.push('/dashboard/influencer/deals')
@@ -42,11 +45,11 @@ export default function EmailLogin() {
   }
 
   return (
-    <form onSubmit={handleLogin} className="flex flex-col gap-3">
+    <form onSubmit={handleLogin} className="flex flex-col gap-4 text-right">
       <input
         type="email"
         placeholder="אימייל"
-        className="border p-2 rounded"
+        className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
@@ -54,15 +57,18 @@ export default function EmailLogin() {
       <input
         type="password"
         placeholder="סיסמה"
-        className="border p-2 rounded"
+        className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit" className="bg-green-600 text-white py-2 rounded hover:bg-green-700">
+      <button
+        type="submit"
+        className="bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+      >
         התחבר
       </button>
-      {error && <p className="text-red-500 text-sm">{error}</p>}
+      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
     </form>
   )
 }

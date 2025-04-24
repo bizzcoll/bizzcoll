@@ -3,38 +3,52 @@
 import { useUser } from '@/app/context/UserContext'
 import LogoutButton from '@/app/components/LogoutButton'
 import Image from 'next/image'
+import { useEffect, useState } from 'react'
 
 export default function Header() {
   const { user, fullName } = useUser()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
-    <header className="px-6 py-3 bg-white/30 backdrop-blur-lg shadow-lg  flex justify-between items-center border-b border-white/20">
-      {/* ימין - מידע על המשתמש */}
-      <div className="flex items-center gap-4 text-sm text-gray-800">
+    <header className="px-4 py-1.5 bg-white/60 backdrop-blur-md shadow-md flex justify-between items-center border-b border-gray-200 h-[70px]">
+      {/* ימין – פרופיל משתמש */}
+      <div className="flex items-center gap-3 text-sm text-gray-700">
         {user ? (
           <>
-            <span className="text-md font-medium tracking-tight">
-              <span className="font-semibold"> {fullName}</span>
-            </span>
+            {!isMobile && (
+              <span className="text-md font-semibold whitespace-nowrap">
+                שלום, <span className="text-blue-900">{fullName}</span>
+              </span>
+            )}
             <LogoutButton />
           </>
         ) : (
-          <span className="text-gray-500"></span>
+          <span className="text-gray-400 italic">לא מחובר</span>
         )}
       </div>
 
-      {/* שמאל - לוגו וטקסט מותג */}
+      {/* שמאל – לוגו וטקסט */}
       <div className="flex items-center gap-3">
+      {!isMobile && (
+          <h1 className="text-[26px] font-extrabold tracking-tight text-gray-900">
+            <span className="text-blue-900">Bizz</span>
+            <span className="text-yellow-400">Coll</span>
+          </h1>
+        )}
         <Image
           src="/logo.png"
           alt="BizzColl Logo"
-          width={68}
-          height={58}
-          className="rounded-full shadow-sm border border-white/40"
+          width={isMobile ? 48 : 80}
+          height={isMobile ? 48 : 80}
+          className="rounded-xl "
         />
-        <h1 className="text-2xl font-bold text-gray-900 tracking-wide uppercase">
-          Bizz<span className="text-blue-600">Co</span><span className="text-yellow-600">ll</span>
-        </h1>
       </div>
     </header>
   )

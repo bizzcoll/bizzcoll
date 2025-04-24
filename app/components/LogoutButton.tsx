@@ -12,11 +12,15 @@ export default function LogoutButton() {
   }
 
   return (
-    <button
-      onClick={handleLogout}
-      className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition text-sm"
-    >
-      התנתק
-    </button>
+    <div className="flex items-center gap-1">
+      <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-md hover:bg-red-500" title="מחובר" />
+      <button
+        onClick={handleLogout}
+        className="text-gray-500 hover:text-red-600 text-sm md:text-base font-medium transition"
+        title="התנתקות"
+      >
+        התנתקות
+      </button>
+    </div>
   )
 }

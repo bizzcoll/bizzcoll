@@ -1,10 +1,12 @@
+// ✅ קובץ: /components/Sidebar/InfluencerSidebar.tsx - רספונסיבי
+
 'use client'
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 
-export default function InfluencerSidebar() {
+export default function InfluencerSidebar({ compact = false }: { compact?: boolean }) {
   const pathname = usePathname()
 
   const linkClass = (href: string) =>
@@ -18,14 +20,22 @@ export default function InfluencerSidebar() {
       }
     )
 
-  return (
-    <aside className="bg-gradient-to-b from-blue-100/40 to-blue-50/30 backdrop-blur-sm w-64 p-6 space-y-6 shadow-inner hidden md:block">
-      <h2 className="text-2xl font-semibold text-blue-800 text-right tracking-wide">🎥 יוצר תוכן</h2>
+  const content = (
+    <>
+      {!compact && <h2 className="text-2xl font-semibold text-blue-800 text-right tracking-wide mb-4">🎥 יוצר תוכן</h2>}
       <nav className="flex flex-col items-end space-y-2 text-sm">
         <Link href="/dashboard/influencer/deals" className={linkClass('/dashboard/influencer/deals')}>📦 מצא דילים</Link>
         <Link href="/dashboard/influencer/applied" className={linkClass('/dashboard/influencer/applied')}>💡 ההגשות שלך</Link>
         <Link href="/dashboard/influencer/profile" className={linkClass('/dashboard/influencer/profile')}>👤 פרופיל</Link>
       </nav>
+    </>
+  )
+
+  return compact ? content : (
+    <aside className="bg-gradient-to-b from-blue-100/40 to-blue-50/30 backdrop-blur-sm w-64 p-6 space-y-6 shadow-inner hidden md:block h-full">
+      <div className="flex flex-col h-full justify-start">
+        {content}
+      </div>
     </aside>
   )
 }

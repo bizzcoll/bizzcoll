@@ -1,10 +1,8 @@
 {
-  "/api/admin/users/route": "app/api/admin/users/route.js",
   "/auth/page": "app/auth/page.js",
-  "/verify-email/page": "app/verify-email/page.js",
-  "/dashboard-redirect/page": "app/dashboard-redirect/page.js",
-  "/unauthorized/page": "app/unauthorized/page.js",
-  "/dashboard/influencer/deals/page": "app/dashboard/influencer/deals/page.js",
-  "/dashboard/deal-maker/profile/page": "app/dashboard/deal-maker/profile/page.js",
-  "/dashboard/admin/page": "app/dashboard/admin/page.js"
+  "/dashboard/deal-maker/page": "app/dashboard/deal-maker/page.js",
+  "/dashboard/deal-maker/new/page": "app/dashboard/deal-maker/new/page.js",
+  "/dashboard/deal-maker/my-deals/[id]/page": "app/dashboard/deal-maker/my-deals/[id]/page.js",
+  "/dashboard/deal-maker/my-deals/page": "app/dashboard/deal-maker/my-deals/page.js",
+  "/dashboard/deal-maker/profile/page": "app/dashboard/deal-maker/profile/page.js"
 }

@@ -28,6 +28,6 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/dashboard/admin/constants.tsx"  ],
   "exclude": ["node_modules"]
 }
