@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma'
 import { notFound } from 'next/navigation'
+import { supabase } from '@/lib/supabaseClient'
 
 type Props = {
   params: {
@@ -15,7 +16,7 @@ export default async function DealDetailsPage({ params }: Props) {
   if (!deal) return notFound()
 
   return (
-    <main className="p-8 flex justify-center">
+    <main className="p-8 flex justify-center" dir="rtl">
       <div className="bg-white/70 backdrop-blur-md border border-green-300 shadow-xl rounded-3xl p-10 w-full max-w-3xl text-right space-y-6">
 
         {/* 🔥 כותרת + לוגו בשורה אחת, ממורכז */}
@@ -24,6 +25,7 @@ export default async function DealDetailsPage({ params }: Props) {
           <h1 className="text-4xl font-bold text-green-700 text-center">פרטי דיל</h1>
         </div>
 
+        {/* 🧾 תוכן הדיל */}
         <div className="space-y-3 text-lg text-gray-800 leading-relaxed">
           {[
             { label: 'כותרת', value: deal.title || 'ללא כותרת' },
@@ -32,12 +34,35 @@ export default async function DealDetailsPage({ params }: Props) {
             { label: 'סוג מדיה', value: deal.media_type || 'לא צוין' },
             { label: 'תאריך יצירה', value: new Date(deal.created_at).toLocaleDateString('he-IL') },
           ].map(({ label, value }) => (
-            <div key={label} className="flex justify-between items-center gap-6 border-b pb-2 last:border-b-0">
-              <span className="text-gray-800 text-right max-w-[70%] break-words">{value}</span>
-              <span className="text-green-800 font-semibold whitespace-nowrap">{label}:</span>
+            <div key={label} className="border-b pb-2 last:border-b-0">
+              <span className="text-green-800 font-semibold whitespace-nowrap">
+                {label}:
+              </span>{' '}
+              <span className="text-gray-800">{value}</span>
             </div>
           ))}
         </div>
+
+        {/* 🎨 גלריית תמונות אם קיימת */}
+        {deal.image_paths?.length > 0 && (
+          <div className="pt-6 space-y-3">
+            <h2 className="text-xl font-bold text-green-800 border-b pb-2">תמונות שצורפו</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {deal.image_paths.map((path, idx) => {
+                const { data } = supabase.storage.from('deals').getPublicUrl(path)
+                const url = data?.publicUrl || ''
+                return (
+                  <img
+                    key={idx}
+                    src={url}
+                    alt={`תמונה ${idx + 1}`}
+                    className="w-full rounded-xl border border-green-300 shadow-md object-cover h-60 transition-transform hover:scale-105 duration-200"
+                  />
+                )
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </main>
   )

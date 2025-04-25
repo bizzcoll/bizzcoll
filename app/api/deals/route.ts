@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { title, description, budget, media_type, business_id } = await req.json()
+    const { title, description, budget, media_type, business_id, image_paths } = await req.json()
 
     if (!business_id) {
       return NextResponse.json({ error: 'Missing business_id' }, { status: 400 })
@@ -27,10 +27,10 @@ export async function POST(req: NextRequest) {
       data: {
         title,
         description,
-        // אם התקציב הגיע בתור string/number
         budget: budget !== undefined ? new Prisma.Decimal(budget) : undefined,
         media_type,
         business_id,
+        image_paths: image_paths || [], // ✅ תמיכה בשדה החדש
       },
     })
 

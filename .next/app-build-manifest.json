@@ -11,11 +11,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/auth/page.js"
     ],
-    "/api/register/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/register/route.js"
-    ],
     "/dashboard-redirect/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -40,11 +35,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/deal-maker/new/page.js"
-    ],
-    "/dashboard/deal-maker/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/deal-maker/page.js"
     ],
     "/dashboard/deal-maker/my-deals/[id]/page": [
       "static/chunks/webpack.js",
