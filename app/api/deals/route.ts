@@ -1,4 +1,3 @@
-// app/api/deals/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
@@ -11,26 +10,46 @@ export async function GET(req: NextRequest) {
   const deals = await prisma.deals.findMany({
     where: { business_id },
     orderBy: { created_at: 'desc' },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      min_budget: true,
+      max_budget: true,
+      budget: true,
+      media_type: true,
+      created_at: true,
+      image_paths: true,
+      closing_date: true,
+    },
   })
   return NextResponse.json(deals)
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const { title, description, budget, media_type, business_id, image_paths } = await req.json()
+    const { title, description, min_budget, max_budget, media_type, business_id, image_paths, closing_date } = await req.json()
 
     if (!business_id) {
       return NextResponse.json({ error: 'Missing business_id' }, { status: 400 })
     }
 
+    const finalClosingDate = closing_date
+      ? new Date(closing_date)
+      : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // ברירת מחדל: 7 ימים קדימה
+
+    // שמירת התקציב העליון גם בשדה budget כדי לשמר תאימות
     const deal = await prisma.deals.create({
       data: {
         title,
         description,
-        budget: budget !== undefined ? new Prisma.Decimal(budget) : undefined,
+        min_budget: min_budget !== undefined ? new Prisma.Decimal(min_budget) : undefined,
+        max_budget: max_budget !== undefined ? new Prisma.Decimal(max_budget) : undefined,
+        budget: max_budget !== undefined ? new Prisma.Decimal(max_budget) : undefined,
         media_type,
         business_id,
-        image_paths: image_paths || [], // ✅ תמיכה בשדה החדש
+        image_paths: image_paths || [],
+        closing_date: finalClosingDate,
       },
     })
 

@@ -1,8 +1,5 @@
 {
-  "/api/deals/route": "app/api/deals/route.js",
-  "/auth/page": "app/auth/page.js",
-  "/dashboard/deal-maker/my-deals/page": "app/dashboard/deal-maker/my-deals/page.js",
+  "/dashboard-redirect/page": "app/dashboard-redirect/page.js",
   "/dashboard/deal-maker/new/page": "app/dashboard/deal-maker/new/page.js",
-  "/dashboard/deal-maker/my-deals/[id]/page": "app/dashboard/deal-maker/my-deals/[id]/page.js",
-  "/dashboard/deal-maker/profile/page": "app/dashboard/deal-maker/profile/page.js"
+  "/dashboard/deal-maker/my-deals/page": "app/dashboard/deal-maker/my-deals/page.js"
 }
