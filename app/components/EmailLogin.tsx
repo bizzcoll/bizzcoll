@@ -46,29 +46,30 @@ export default function EmailLogin() {
 
   return (
     <form onSubmit={handleLogin} className="flex flex-col gap-4 text-right">
-      <input
-        type="email"
-        placeholder="אימייל"
-        className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="סיסמה"
-        className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button
-        type="submit"
-        className="bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
-      >
-        התחבר
-      </button>
-      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-    </form>
+    <input
+      type="email"
+      placeholder="Email"
+      className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      required
+    />
+    <input
+      type="password"
+      placeholder="Password"
+      className="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+      required
+    />
+    <button
+      type="submit"
+      className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-2 rounded-full font-semibold text-sm transition shadow-sm"
+    >
+      התחבר
+    </button>
+    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+  </form>
+  
   )
 }

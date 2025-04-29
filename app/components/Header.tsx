@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabaseClient'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { LogOut } from 'lucide-react' // אייקון יציאה
+import { LogOut } from 'lucide-react'
 
 export default function Header() {
   const { user, fullName } = useUser()
@@ -25,31 +25,40 @@ export default function Header() {
     router.replace('/auth')
   }
 
-  return (
-    <header className="px-4 py-1.5 bg-white/60 backdrop-blur-md shadow-md flex justify-between items-center border-b border-gray-200 h-[70px]">
+  const handleLogoClick = () => {
+    if (user) {
+      router.push('/dashboard-redirect')
+    } else {
+      router.push('/auth')
+    }
+  }
+  
 
-      {/* ימין – BizzColl + שלום נירן */}
-      <div className="flex items-center gap-3 text-sm text-gray-700">
+  return (
+    <header className="px-6 py-2 bg-white/40 backdrop-blur-lg shadow-md rounded-b-2xl flex justify-between items-center border-b border-blue-100 h-[72px] transition-all duration-300">
+
+      {/* ימין – טקסט + כפתור */}
+      <div className="flex items-center gap-4 text-sm text-gray-700">
         {user ? (
           <>
             {!isMobile && (
               <span className="text-md font-semibold whitespace-nowrap flex items-center gap-2">
-                <span className="text-[20px] font-extrabold tracking-tight text-gray-900">
+                <span className="text-[22px] font-extrabold tracking-tight text-gray-900">
                   <span className="text-blue-900">Bizz</span>
                   <span className="text-yellow-400">Coll</span>
                 </span>
                 <span className="text-gray-400 font-light">|</span>
                 <span>שלום,</span>
-                <span className="text-blue-900">{fullName}</span>
+                <span className="text-blue-800">{fullName}</span>
               </span>
             )}
             <button
               onMouseEnter={() => setHovered(true)}
               onMouseLeave={() => setHovered(false)}
               onClick={handleSignOut}
-              className={`px-3 py-1 rounded-lg font-semibold flex items-center gap-1 transition-all duration-200 shadow-sm ${
+              className={`px-4 py-1.5 rounded-full font-semibold flex items-center gap-2 transition-all duration-300 shadow-sm ${
                 hovered ? 'bg-red-500 hover:shadow-md' : 'bg-green-500 hover:shadow-md'
-              } text-white`}
+              } text-white text-sm`}
             >
               <LogOut size={18} />
               {hovered ? 'התנתק' : 'מחובר'}
@@ -60,14 +69,17 @@ export default function Header() {
         )}
       </div>
 
-      {/* שמאל – לוגו תמונה בלבד */}
-      <div className="flex items-center">
+      {/* שמאל – לוגו */}
+      <div
+        className="flex items-center cursor-pointer transition-transform duration-300 hover:scale-105"
+        onClick={handleLogoClick}
+      >
         <Image
           src="/logo.png"
           alt="BizzColl Logo"
-          width={isMobile ? 48 : 80}
-          height={isMobile ? 48 : 80}
-          className="rounded-xl"
+          width={isMobile ? 44 : 70}
+          height={isMobile ? 44 : 70}
+          className=""
         />
       </div>
     </header>

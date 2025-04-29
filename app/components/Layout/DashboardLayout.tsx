@@ -5,7 +5,7 @@ import MobileDrawer from '@/app/components/Sidebar/MobileDrawer'
 import DealMakerSidebar from '@/app/components/Sidebar/DealMakerSidebar'
 import InfluencerSidebar from '@/app/components/Sidebar/InfluencerSidebar'
 import AdminSidebar from '@/app/components/Sidebar/AdminViewSwitcherSidebar'
-import RoleTopbar from '@/app/components/Topbar/RoleTopbar' // ✅ ייבוא חדש
+import RoleTopbar from '@/app/components/Topbar/RoleTopbar'
 
 type Role = 'ADMIN' | 'DEAL_MAKER' | 'INFLUENCER'
 
@@ -27,7 +27,7 @@ export default function DashboardLayout({
       : DealMakerSidebar
 
   return (
-    <div className="flex flex-col md:flex-row-reverse h-screen">
+    <div className="flex flex-col md:flex-row-reverse min-h-screen overflow-x-hidden">
       {/* Desktop Sidebar */}
       <div className="hidden md:block">
         <Sidebar />
@@ -38,9 +38,12 @@ export default function DashboardLayout({
         <MobileDrawer role={role} />
       </div>
 
+      {/* תוכן + Topbar */}
       <div className="flex-1 flex flex-col">
-        <RoleTopbar role={role} /> {/* ✅ שימוש ב-Topbar הכללי */}
-        <main className="p-4 md:p-6 overflow-y-auto">{children}</main>
+        <RoleTopbar role={role} />
+
+        {/* הסרנו overflow-y-auto */}
+        <main className="p-4 md:p-6">{children}</main>
       </div>
     </div>
   )

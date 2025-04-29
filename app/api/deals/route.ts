@@ -4,26 +4,45 @@ import { Prisma } from '@prisma/client'
 
 export async function GET(req: NextRequest) {
   const business_id = req.nextUrl.searchParams.get('business_id')
+  const page = parseInt(req.nextUrl.searchParams.get('page') || '1')
+  const limit = parseInt(req.nextUrl.searchParams.get('limit') || '4')
+  const skip = (page - 1) * limit
+
   if (!business_id) {
     return NextResponse.json({ error: 'Missing business_id' }, { status: 400 })
   }
-  const deals = await prisma.deals.findMany({
-    where: { business_id },
-    orderBy: { created_at: 'desc' },
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      min_budget: true,
-      max_budget: true,
-      budget: true,
-      media_type: true,
-      created_at: true,
-      image_paths: true,
-      closing_date: true,
-    },
-  })
-  return NextResponse.json(deals)
+
+  try {
+    // שליפה עם דילוג (skip) והגבלה (limit)
+    const deals = await prisma.deals.findMany({
+      where: { business_id },
+      orderBy: { created_at: 'desc' },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        min_budget: true,
+        max_budget: true,
+        budget: true,
+        media_type: true,
+        created_at: true,
+        image_paths: true,
+        closing_date: true,
+      },
+      skip,
+      take: limit,
+    })
+
+    // סך הכל דילים
+    const total = await prisma.deals.count({
+      where: { business_id },
+    })
+
+    return NextResponse.json({ deals, total })
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ error: 'Could not fetch deals' }, { status: 500 })
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -38,7 +57,6 @@ export async function POST(req: NextRequest) {
       ? new Date(closing_date)
       : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // ברירת מחדל: 7 ימים קדימה
 
-    // שמירת התקציב העליון גם בשדה budget כדי לשמר תאימות
     const deal = await prisma.deals.create({
       data: {
         title,

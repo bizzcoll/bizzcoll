@@ -14,18 +14,37 @@ export default function AuthPage() {
     if (user) {
       router.replace('/dashboard-redirect')
     } else {
-      setChecked(true) // ה־user נטען והוא לא מחובר
+      setChecked(true)
     }
   }, [user, router])
 
   if (!checked && !user) {
-    // עדיין טוען את המשתמש, לא מציג כלום
     return null
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6 gap-6">
-      <AuthForm />
+    <main className="flex flex-col md:flex-row justify-center items-center min-h-screen p-8 gap-20 bg-gradient-to-br from-blue-100 via-white to-blue-200" dir="rtl">
+
+      {/* טור ימין - כותרת */}
+      <div className="text-center md:text-right md:max-w-md md:self-center animate-fadeIn">
+        <h1 className="text-5xl md:text-6xl font-light tracking-wide text-blue-900 leading-tight mb-4 font-sans">
+          <span className="block font-extrabold tracking-tight text-blue-900">
+            BizzColl🔥
+          </span>
+          מי צריך סוכן?
+        </h1>
+        <p className="mt-6 text-gray-600 text-lg hidden md:block font-light tracking-wide">
+          הצטרף למהפכת החיבורים הישירים בין עסקים ליוצרים 
+        </p>
+      </div>
+
+      {/* טור שמאל - טופס */}
+      <div className="flex justify-center items-center w-full max-w-md animate-fadeIn">
+        <div className="bg-white/40 backdrop-blur-xl p-8 rounded-2xl border border-blue-200 shadow-lg w-full">
+          <AuthForm />
+        </div>
+      </div>
+
     </main>
   )
 }

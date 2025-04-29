@@ -1,4 +1,4 @@
-# scripts/admin-register.ps1
+# .\scripts\admin-register.ps1    פקודת ריצה
 $body = @{
   full_name = "Admin Dishi"  # השתמש באותיות לטיניות כדי למנוע תקלות קידוד
   email     = "dvirdishi@gmail.com"

@@ -1,8 +1,8 @@
-// ✅ קובץ: /app/layout.tsx - כולל גובה מלא לפיקס Sidebar ב-MobileDrawer
-
 import './globals.css'
 import { UserProvider } from '@/app/context/UserContext'
 import Header from '@/app/components/Header'
+import Footer from '@/app/components/Footer'
+import AccessibilityWidget from '@/app/components/AccessibilityWidget' // ✅ ייבוא קומפוננטת נגישות
 import { Toaster } from 'react-hot-toast'
 import type { Metadata } from 'next'
 
@@ -38,13 +38,20 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="h-full">
-      <body className="h-full min-h-screen bg-white text-black">
+    <html lang="en" className="min-h-screen overflow-x-hidden">
+      <body className="flex flex-col min-h-screen overflow-x-hidden bg-white text-black">
         <UserProvider>
-          <div className=" top-0 z-50 shadow-sm bg-white">
+          <div className="top-0 z-50 shadow-sm bg-white">
             <Header />
           </div>
-          <main className="min-h-[calc(100vh-64px)]">{children}</main>
+
+          {/* פתרון לגלילה – גובה קבוע לדף פחות גובה Header */}
+          <main className="flex-1 min-h-[calc(100vh-70px)]">
+            {children}
+          </main>
+
+          <Footer />
+          <AccessibilityWidget /> {/* 🔥 קומפוננטת נגישות חדשה */}
           <Toaster position="top-center" reverseOrder={false} />
         </UserProvider>
       </body>

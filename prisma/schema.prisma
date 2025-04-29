@@ -9,6 +9,21 @@ datasource db {
   schemas  = ["auth", "public"]
 }
 
+model business_profiles {
+  id          String   @id @default(uuid()) @db.Uuid
+  business_id String   @unique @db.Uuid
+  name        String
+  description String?
+  category    String?
+  phone       String?
+  website     String?
+  logo_url    String?
+  cover_url   String?
+  updated_at  DateTime @updatedAt
+  created_at  DateTime @default(now())
+
+  @@schema("public")
+}
 
 model applications {
   id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
@@ -26,21 +41,20 @@ model applications {
 model deals {
   id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title        String?
-  business_id  String?         @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  business_id  String?        @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   description  String?
-  budget       Decimal?        @db.Decimal
-  min_budget   Decimal?        @db.Decimal    // ✅ חדש
-  max_budget   Decimal?        @db.Decimal    // ✅ חדש
-  media_type   String?         @default("")
-  created_at   DateTime        @default(now()) @db.Timestamptz(6)
-  closing_date DateTime?       @db.Timestamptz(6)
-  image_paths  String[]        @default([])
+  budget       Decimal?       @db.Decimal
+  media_type   String?        @default("")
+  created_at   DateTime       @default(now()) @db.Timestamptz(6)
+  closing_date DateTime?      @db.Timestamptz(6)
+  image_paths  String[]       @default([])
+  max_budget   Decimal?       @db.Decimal
+  min_budget   Decimal?       @db.Decimal
   applications applications[]
-  users        users?          @relation(fields: [business_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users        users?         @relation(fields: [business_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@schema("public")
 }
-
 
 model users {
   id           String         @id @default(dbgenerated("auth.uid()")) @db.Uuid

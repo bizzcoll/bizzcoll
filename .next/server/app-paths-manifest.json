@@ -1,5 +1,5 @@
 {
-  "/dashboard-redirect/page": "app/dashboard-redirect/page.js",
-  "/dashboard/deal-maker/new/page": "app/dashboard/deal-maker/new/page.js",
-  "/dashboard/deal-maker/my-deals/page": "app/dashboard/deal-maker/my-deals/page.js"
+  "/auth/page": "app/auth/page.js",
+  "/accessibility-statement/page": "app/accessibility-statement/page.js",
+  "/reset-password/page": "app/reset-password/page.js"
 }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { Sparkles, Building2 } from 'lucide-react' // ✅ ייבוא אייקונים מ־Lucide
 
 export default function EmailRegister() {
   const [email, setEmail] = useState('')
@@ -43,53 +44,64 @@ export default function EmailRegister() {
   }
 
   return (
-    <form onSubmit={handleRegister} className="space-y-4 text-right">
+    <form onSubmit={handleRegister} className="space-y-6 text-right">
       <input
         type="text"
         placeholder="שם מלא"
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
         required
-        className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
       />
       <input
         type="email"
-        placeholder="אימייל"
+        placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
       />
       <input
         type="password"
-        placeholder="סיסמה"
+        placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
-        className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
       />
 
-      <div className="flex flex-wrap justify-center gap-2 text-sm">
+      {/* כפתורי בחירת תפקיד */}
+      <div className="flex flex-wrap justify-center gap-4 text-sm">
         <button
           type="button"
           onClick={() => setRole('INFLUENCER')}
-          className={`px-3 py-2 rounded border ${role === 'INFLUENCER' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}
+          className={`flex items-center gap-2 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform ${
+            role === 'INFLUENCER'
+              ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg scale-105 ring-2 ring-blue-300'
+              : 'bg-white border border-blue-300 text-blue-600 hover:bg-blue-50 hover:shadow-md hover:border-blue-400 hover:scale-105'
+          }`}
         >
-          יוצר תוכן
+          <Sparkles size={18} /> יוצר תוכן
         </button>
+        
         <button
           type="button"
           onClick={() => setRole('DEAL_MAKER')}
-          className={`px-3 py-2 rounded border ${role === 'DEAL_MAKER' ? 'bg-blue-600 text-white' : 'bg-gray-100'}`}
+          className={`flex items-center gap-2 px-6 py-2 rounded-full font-semibold transition-all duration-300 transform ${
+            role === 'DEAL_MAKER'
+              ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg scale-105 ring-2 ring-blue-300'
+              : 'bg-white border border-blue-300 text-blue-600 hover:bg-blue-50 hover:shadow-md hover:border-blue-400 hover:scale-105'
+          }`}
         >
-          בעל עסק
+          <Building2 size={18} /> בעל עסק
         </button>
       </div>
 
+      {/* כפתור הרשמה */}
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 transition"
+        className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white py-2 rounded-full font-semibold text-sm transition shadow-md"
       >
         {isSubmitting ? 'נרשם...' : 'הרשמה'}
       </button>

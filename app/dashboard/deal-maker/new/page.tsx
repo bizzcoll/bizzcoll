@@ -20,7 +20,7 @@ export default function NewDealPage() {
   }, [router])
 
   return (
-    <main className="p-6 space-y-6 text-right">
+    <main className="p-0 space-y-0 text-right">
       <NewDealForm />
     </main>
   )

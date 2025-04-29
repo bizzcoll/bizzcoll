@@ -22,7 +22,7 @@ export default function InfluencerSidebar({ compact = false }: { compact?: boole
 
   const content = (
     <>
-      {!compact && <h2 className="text-2xl font-semibold text-blue-800 text-right tracking-wide mb-4">🎥 יוצר תוכן</h2>}
+      {!compact && <h2 className="text-2xl font-semibold text-blue-800 text-right tracking-wide mb-4">🎥 פאנל יוצר תוכן</h2>}
       <nav className="flex flex-col items-end space-y-2 text-sm">
         <Link href="/dashboard/influencer/deals" className={linkClass('/dashboard/influencer/deals')}>📦 מצא דילים</Link>
         <Link href="/dashboard/influencer/applied" className={linkClass('/dashboard/influencer/applied')}>💡 ההגשות שלך</Link>

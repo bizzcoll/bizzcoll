@@ -101,7 +101,7 @@ export default function NewDealForm() {
         if (!file.type.startsWith('image/')) throw new Error(`"${file.name}" אינו קובץ תמונה`)
         if (file.size > 7 * 1024 * 1024) throw new Error(`"${file.name}" חורג מ־7MB`)
 
-        const ext = file.name.split('.').pop()
+        const ext = file.name.split('.').pop()?.toLowerCase() // ✅ תיקון סיומת קטנה
         const filePath = `${uuidv4()}.${ext}`
 
         const { error: uploadError } = await supabase.storage.from('deals').upload(filePath, file)
@@ -135,7 +135,7 @@ export default function NewDealForm() {
   }
 
   return (
-    <div className="flex justify-center items-start min-h-screen pt-10 bg-gray-50" dir="rtl">
+    <div className="flex justify-center items-start min-h-screen pt-10 bg-gradient-to-br from-green-100 via-white to-green-100" dir="rtl">
       <form onSubmit={handleSubmit} className="bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-2xl space-y-6 w-full max-w-4xl mx-auto" dir="rtl">
         <h2 className="text-3xl font-bold text-green-700 mb-6 text-center">צור דיל חדש ➕</h2>
 
@@ -158,7 +158,7 @@ export default function NewDealForm() {
               const lines = inputValue.split('\n')
               if (lines.length <= 6) setDescription(inputValue)
             }}
-            placeholder="תאר את קמפגיין הפרסום שלך בפירוט..."
+            placeholder="תאר את קמפיין הפרסום שלך בפירוט..."
             maxLength={MAX_DESC_LENGTH}
           />
         </FormField>
@@ -202,7 +202,7 @@ export default function NewDealForm() {
             options={[
               { value: 'video', label: 'וידאו' },
               { value: 'image', label: 'תמונה' },
-              { value: 'article', label: 'מאמר' }
+              { value: 'article', label: 'פוסט' },
             ]}
             placeholder="בחר סוג מדיה"
           />

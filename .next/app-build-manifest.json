@@ -11,30 +11,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/auth/page.js"
     ],
-    "/dashboard-redirect/page": [
+    "/accessibility-statement/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard-redirect/page.js"
+      "static/chunks/app/accessibility-statement/page.js"
     ],
-    "/dashboard/deal-maker/layout": [
+    "/api/register/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/deal-maker/layout.js"
+      "static/chunks/app/api/register/route.js"
     ],
-    "/dashboard/deal-maker/my-deals/page": [
+    "/reset-password/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/deal-maker/my-deals/page.js"
-    ],
-    "/api/deals/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/deals/route.js"
-    ],
-    "/dashboard/deal-maker/new/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/deal-maker/new/page.js"
+      "static/chunks/app/reset-password/page.js"
     ]
   }
 }
