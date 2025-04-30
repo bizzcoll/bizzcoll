@@ -26,7 +26,10 @@ export default function AdminViewSwitcherSidebar({ compact = false }: { compact?
           🔐 ניהול משתמשים
         </Link>
         <Link href="/dashboard/admin/open-deals" className={linkClass('/dashboard/admin/open-deals')}>
-          📢  ניהול דילים פתוחים 
+          📢 ניהול דילים פתוחים
+        </Link>
+        <Link href="/dashboard/admin/registration-forms" className={linkClass('/dashboard/admin/registration-forms')}>
+          📝 ניהול בקשות הרשמה
         </Link>
         <Link href="/dashboard/deal-maker/my-deals" className={linkClass('/dashboard/deal-maker/my-deals')}>
           💼 צפייה כ־Deal Maker
@@ -34,7 +37,6 @@ export default function AdminViewSwitcherSidebar({ compact = false }: { compact?
         <Link href="/dashboard/influencer/deals" className={linkClass('/dashboard/influencer/deals')}>
           🌟 צפייה כ־Influencer
         </Link>
-        {/* 🔥 לינק חדש לדילים פתוחים */}
       </nav>
     </>
   )

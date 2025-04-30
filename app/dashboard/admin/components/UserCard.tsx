@@ -13,10 +13,10 @@ type Props = {
 
 export default function UserCard({ user, onDelete }: Props) {
   const [showConfirm, setShowConfirm] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false) // ✅ ניהול מצב טעינה
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const handleDelete = async () => {
-    setIsDeleting(true) // ✅ התחלת טעינה
+    setIsDeleting(true)
     try {
       const {
         data: { session },
@@ -60,23 +60,23 @@ export default function UserCard({ user, onDelete }: Props) {
         <div><strong>Display Name:</strong> {user.user_metadata?.full_name || 'לא ידוע'}</div>
         <div><strong>Dashboard Role:</strong> {user.user_metadata?.role || 'לא ידוע'}</div>
         <div><strong>Confirmed:</strong> {user.email_confirmed_at ? '✔️' : '❌'}</div>
+        <div><strong>Approved:</strong> {user.user_metadata?.approved ? '✅ מאושר' : '❌ ממתין לאישור'}</div>
         <div><strong>Created At:</strong> {new Date(user.created_at).toLocaleString('he-IL')}</div>
         <div className="flex gap-2 mt-2">
-            <button
+          <button
             onClick={() => setShowConfirm(true)}
             className="bg-red-500 text-white text-sm px-2 py-1 rounded"
-            >
+          >
             🗑️ מחק
-            </button>
-            <button className="bg-blue-500 text-white text-sm px-2 py-1 rounded">
+          </button>
+          <button className="bg-blue-500 text-white text-sm px-2 py-1 rounded">
             ✏️ שנה תפקיד
-            </button>
-            <button className="bg-purple-600 text-white text-sm px-2 py-1 rounded">
+          </button>
+          <button className="bg-purple-600 text-white text-sm px-2 py-1 rounded">
             💬 פתח צ׳אט
-            </button>
+          </button>
         </div>
-        </li>
-
+      </li>
 
       <ConfirmModal
         open={showConfirm}
@@ -84,7 +84,7 @@ export default function UserCard({ user, onDelete }: Props) {
           if (!isDeleting) setShowConfirm(false)
         }}
         onConfirm={handleDelete}
-        isLoading={isDeleting} // ✅ שולח את מצב הטעינה
+        isLoading={isDeleting}
         title="מחיקת משתמש"
         description={`אתה בטוח שברצונך למחוק את המשתמש ${user.email}?`}
         confirmText="כן, מחק"

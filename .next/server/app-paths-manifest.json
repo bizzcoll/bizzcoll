@@ -1,5 +1,7 @@
 {
   "/auth/page": "app/auth/page.js",
-  "/accessibility-statement/page": "app/accessibility-statement/page.js",
-  "/reset-password/page": "app/reset-password/page.js"
+  "/registration/deal-maker/page": "app/registration/deal-maker/page.js",
+  "/dashboard/admin/registration-forms/page": "app/dashboard/admin/registration-forms/page.js",
+  "/dashboard/admin/page": "app/dashboard/admin/page.js",
+  "/dashboard/admin/open-deals/page": "app/dashboard/admin/open-deals/page.js"
 }

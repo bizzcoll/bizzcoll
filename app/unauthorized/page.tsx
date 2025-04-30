@@ -1,9 +1,16 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function UnauthorizedPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const reason = searchParams.get('reason')
+
+  const message =
+    reason === 'approval'
+      ? 'ההרשמה שלך ממתינה לאישור ידני. תקבל מייל לאחר האישור.'
+      : 'ייתכן שניסית לגשת לעמוד שלא מיועד לתפקיד שלך, או שאתה לא מחובר.'
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 via-white to-red-100 p-6">
@@ -11,17 +18,13 @@ export default function UnauthorizedPage() {
         <h1 className="text-3xl font-bold text-red-700 tracking-wide">
           אין לך הרשאה לצפות בדף זה ❌
         </h1>
-        <p className="text-gray-700 text-base leading-relaxed">
-          ייתכן שניסית לגשת לעמוד שלא מיועד לתפקיד שלך, או שאתה לא מחובר.
-        </p>
-
+        <p className="text-gray-700 text-base leading-relaxed">{message}</p>
         <button
-            onClick={() => router.replace('/dashboard-redirect')}
-            className="mt-4 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2.5 rounded-lg transition-all duration-300 shadow-md"
-            >
-            חזור לדשבורד
-            </button>
-
+          onClick={() => router.replace('/dashboard-redirect')}
+          className="mt-4 bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2.5 rounded-lg transition-all duration-300 shadow-md"
+        >
+          חזור לדשבורד
+        </button>
       </div>
     </main>
   )

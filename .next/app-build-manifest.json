@@ -11,20 +11,95 @@
       "static/chunks/main-app.js",
       "static/chunks/app/auth/page.js"
     ],
-    "/accessibility-statement/page": [
+    "/dashboard-redirect/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/accessibility-statement/page.js"
+      "static/chunks/app/dashboard-redirect/page.js"
+    ],
+    "/dashboard/influencer/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/influencer/layout.js"
+    ],
+    "/dashboard/influencer/deals/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/influencer/deals/page.js"
+    ],
+    "/api/deals-available/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/deals-available/route.js"
+    ],
+    "/dashboard/influencer/profile/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/influencer/profile/page.js"
+    ],
+    "/api/influencer-profile/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/influencer-profile/route.js"
+    ],
+    "/dashboard/influencer/applied/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/influencer/applied/page.js"
     ],
     "/api/register/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/api/register/route.js"
     ],
-    "/reset-password/page": [
+    "/registration/deal-maker/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/reset-password/page.js"
+      "static/chunks/app/registration/deal-maker/page.js"
+    ],
+    "/api/submit-form/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/submit-form/route.js"
+    ],
+    "/dashboard/admin/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/admin/layout.js"
+    ],
+    "/dashboard/admin/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/admin/page.js"
+    ],
+    "/api/admin/users/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/admin/users/route.js"
+    ],
+    "/dashboard/admin/open-deals/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/admin/open-deals/page.js"
+    ],
+    "/dashboard/admin/registration-forms/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/admin/registration-forms/page.js"
+    ],
+    "/api/admin/registration-forms/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/admin/registration-forms/route.js"
+    ],
+    "/api/admin/approve-form/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/admin/approve-form/route.js"
+    ],
+    "/api/admin/delete-user/route": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/api/admin/delete-user/route.js"
     ]
   }
 }

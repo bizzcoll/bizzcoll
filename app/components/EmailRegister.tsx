@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { Sparkles, Building2 } from 'lucide-react' // ✅ ייבוא אייקונים מ־Lucide
+import { Sparkles, Building2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 export default function EmailRegister() {
   const [email, setEmail] = useState('')
@@ -10,6 +11,7 @@ export default function EmailRegister() {
   const [role, setRole] = useState<'INFLUENCER' | 'DEAL_MAKER'>('INFLUENCER')
   const [fullName, setFullName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -35,7 +37,18 @@ export default function EmailRegister() {
         return
       }
 
-      toast.success('נרשמת בהצלחה! נא לבדוק את האימייל ולאשר לפני התחברות. ✉️', { position: 'top-center' })
+      toast.success('נרשמת בהצלחה! המשך למילוי טופס הרישום ✍️', { position: 'top-center' })
+
+      // 🔁 מעביר לדף מילוי טופס לפי role
+     // 🔁 מעביר לדף מילוי טופס לפי role (עם הנתיב שלך!)
+      if (role === 'INFLUENCER') {
+        router.push(`/registration/influencer?email=${encodeURIComponent(email)}`)
+      } else {
+        router.push(`/registration/deal-maker?email=${encodeURIComponent(email)}`)
+      }
+    
+
+
     } catch (err: any) {
       console.error('❌ Network error:', err)
       setIsSubmitting(false)
@@ -70,7 +83,6 @@ export default function EmailRegister() {
         className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
       />
 
-      {/* כפתורי בחירת תפקיד */}
       <div className="flex flex-wrap justify-center gap-4 text-sm">
         <button
           type="button"
@@ -83,7 +95,7 @@ export default function EmailRegister() {
         >
           <Sparkles size={18} /> יוצר תוכן
         </button>
-        
+
         <button
           type="button"
           onClick={() => setRole('DEAL_MAKER')}
@@ -97,7 +109,6 @@ export default function EmailRegister() {
         </button>
       </div>
 
-      {/* כפתור הרשמה */}
       <button
         type="submit"
         disabled={isSubmitting}
